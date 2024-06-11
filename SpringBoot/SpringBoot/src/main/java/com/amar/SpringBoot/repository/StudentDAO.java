@@ -12,15 +12,15 @@ public interface StudentDAO {
      void save(Student student);
 
      //Read
-     Optional<Student> getSingleStudent(String studentId);
+     Optional<Student> getSingleStudent(int studentId);
 
      List<Student> getAllStudent();
 
      //Update
-     int updateStudent(Student student, String fName, String lName);
+     Student updateStudent(Student student);
 
      //Delete
-     int deleteStudent();
+     void deleteStudent(Student student);
 
 
 

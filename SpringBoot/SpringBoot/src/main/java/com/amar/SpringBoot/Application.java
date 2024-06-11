@@ -33,7 +33,7 @@ public class Application {
 
 		viewAll(studentDAO);
 
-		studentDAO.updateStudent(student1, "Jhampa", "Rampa");
+//		studentDAO.updateStudent(student1, "Jhampa", "Rampa");
 
 		viewAll(studentDAO);
 

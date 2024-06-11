@@ -31,37 +31,26 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public Optional<Student> getSingleStudent(String studentId) {
+    public Optional<Student> getSingleStudent(int studentId) {
         return Optional.ofNullable(entityManager.find(Student.class,studentId));
     }
 
     @Override
     public List<Student> getAllStudent() {
-        TypedQuery<Student> getAll = entityManager.createQuery("SELECT s FROM Student s", Student.class);
+        TypedQuery<Student> getAll = entityManager.createQuery("from Student", Student.class);
         return getAll.getResultList();
     }
 
 
     @Override
     @Transactional
-    public int updateStudent(Student student, String firstName, String lastName) {
-        int studentId = student.getId();
-//        TypedQuery<Student> studentData = entityManager.createQuery("FROM Student s where s.id= :stdId", Student.class);
-//        studentData.setParameter("stdId" , studentId);
-//        Student singleStudent = studentData.getSingleResult();
-
-
-        return entityManager.createQuery("UPDATE Student SET firstName= 'JAPAN', lastName= 'China' WHERE id= 1").executeUpdate();
-//        query.setParameter("firstName" , firstName);
-//        query.setParameter("lastName" , lastName);
-//        query.setParameter("id" , studentId);
-////        Student singleResult = studentData.getSingleResult();
-////        save(singleResult);
-//        return query.executeUpdate();
+    public Student updateStudent(Student student) {
+        Student updatedStudent = entityManager.merge(student);
+        return updatedStudent;
     }
 
     @Override
-    public int deleteStudent() {
-        return 0;
+    public void deleteStudent(Student student) {
+        entityManager.remove(student);
     }
 }
